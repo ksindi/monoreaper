@@ -2,6 +2,7 @@
 #
 # Merge multiple GitHub repos into a master-repo.
 #
+# chmod +x merge-repos.sh
 # Usage: bash merge-repos.sh master-dir owner0/repo0 owner1/repo1
 
 # check number of arguments at least 1
@@ -12,16 +13,11 @@ if (( $# < 2 )); then
   exit 1
 fi
 
-WORK_DIR=/tmp/github-mergers
+WORK_DIR=/tmp/github-merge-repos
 rm -rf $WORK_DIR
 WORK_SRC_DIR=$WORK_DIR/src && mkdir -p $WORK_SRC_DIR
 WORK_TGT_DIR=$WORK_DIR/tgt && mkdir -p $WORK_TGT_DIR
 MASTER_DIR=$1 && mkdir $MASTER_DIR
-
-# get github credentials
-read -p "Git Username: " GH_UNAME
-read -s -p "Git Password: " GH_PASSWD
-printf '\n'
 
 #######################################
 # Move repo contents into a subdirectory of the same name
@@ -60,7 +56,7 @@ for repo in "${@:2}"
 do
   git checkout clean
   IFS='/' read owner repo_name <<<$repo
-  gh_url="https://${GH_UNAME}:${GH_PASSWD}@github.com/${owner}/${repo_name}.git"
+  gh_url="https://github.com/${owner}/${repo_name}.git"
   git clone $gh_url $WORK_SRC_DIR/$repo_name
   prepare_repo $repo_name
   remote_name=remote_${repo_name}
