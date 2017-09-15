@@ -3,13 +3,13 @@
 # Merge multiple GitHub repos into a master-repo.
 #
 # chmod +x monoreaper.sh
-# Usage: bash monoreaper.sh master-dir owner0/repo0 owner1/repo1
+# Usage: bash monoreaper.sh monorepo owner0/repo0 owner1/repo1
 
 # check number of arguments at least 1
 if (( $# < 2 )); then
-  printf 'Error: At least one repo required.\n'
-  printf 'Usage: bash merge-repos.sh master-dir owner0/repo0 owner1/repo1'
-  printf 'Exiting...\n'
+  printf "Error: At least one repo required.\n"
+  printf "Usage: bash monoreaper.sh monorepo-dir owner0/repo0 owner1/repo1"
+  printf "Exiting...\n"
   exit 1
 fi
 
@@ -43,19 +43,19 @@ prepare_repo () {
   popd
 }
 
-# create master-repo directory
+# create root directory
 pushd $MASTER_DIR
 git init
 touch README.md
 git add README.md
-git commit -am 'Inital Commit'
+git commit -am "Inital Commit"
 # create clean branch which will be used to stage new repos
 git branch clean
 
 for repo in "${@:2}"
 do
   git checkout clean
-  IFS='/' read owner repo_name <<<$repo
+  IFS="/" read owner repo_name <<<$repo
   gh_url="https://github.com/${owner}/${repo_name}.git"
   git clone $gh_url $WORK_SRC_DIR/$repo_name
   prepare_repo $repo_name
@@ -65,12 +65,12 @@ do
   git branch $repo_name $remote_name/master
   git checkout $repo_name
   git checkout master
-  git merge --squash $repo_name master
-  git commit -am "Squashed ${repo_name}"
-  git remote remove $remote_name 
+  git merge $repo_name master --no-commit --no-ff
+  git commit -am "Merge repo ${repo_name}"
+  git remote remove $remote_name
 done
 popd
 
 # clean up
-printf 'Cleaning up...\n'
+printf "Cleaning up...\n"
 rm -rf WORK_DIR
