@@ -13,7 +13,7 @@ if (( $# < 2 )); then
   exit 1
 fi
 
-WORK_DIR=/tmp/github-merge-repos
+WORK_DIR=$(mktemp -d)
 rm -rf $WORK_DIR
 WORK_SRC_DIR=$WORK_DIR/src && mkdir -p $WORK_SRC_DIR
 WORK_TGT_DIR=$WORK_DIR/tgt && mkdir -p $WORK_TGT_DIR
