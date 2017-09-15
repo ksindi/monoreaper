@@ -2,7 +2,7 @@
 #
 # Merge multiple GitHub repos into a master-repo.
 #
-# chmod +x merge-repos.sh
+# chmod +x monoreaper.sh
 # Usage: bash monoreaper.sh master-dir owner0/repo0 owner1/repo1
 
 # check number of arguments at least 1
