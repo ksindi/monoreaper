@@ -1,6 +1,6 @@
 # MonoReaper
 
-Merge github repositories into a master directory to create a monorepo whil preserving commit history.
+Merge github repositories into a master directory to create a monorepo while preserving commit history.
 
 ## Usage
 
