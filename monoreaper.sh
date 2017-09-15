@@ -48,7 +48,7 @@ pushd $MASTER_DIR
 git init
 touch README.md
 git add README.md
-git commit -am "Inital Commit"
+git commit -am "Inital commit (monorepo)"
 # create clean branch which will be used to stage new repos
 git branch clean
 
