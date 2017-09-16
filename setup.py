@@ -25,7 +25,8 @@ setup(
         'sphinx_rtd_theme',
     ],
     tests_require=[
-        'pytest'
+        'pytest',
+        'GitPython'
     ],
     include_package_data=True,
     zip_safe=False,
