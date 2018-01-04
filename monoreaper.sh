@@ -56,7 +56,7 @@ for repo in "${@:2}"
 do
   git checkout clean
   IFS="/" read owner repo_name <<<$repo
-  gh_url="https://github.com/${owner}/${repo_name}.git"
+  gh_url="git@github.com/${owner}/${repo_name}.git"
   git clone $gh_url $WORK_SRC_DIR/$repo_name
   prepare_repo $repo_name
   remote_name=remote_${repo_name}
