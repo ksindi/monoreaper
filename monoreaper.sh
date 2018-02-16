@@ -8,7 +8,7 @@
 # check number of arguments at least 1
 if (( $# < 2 )); then
   printf "Error: At least one repo required.\n"
-  printf "Usage: bash monoreaper.sh monorepo-dir owner0/repo0 owner1/repo1"
+  printf "Usage: bash monoreaper.sh monorepo owner0/repo0 owner1/repo1"
   printf "Exiting...\n"
   exit 1
 fi
@@ -17,7 +17,7 @@ WORK_DIR=$(mktemp -d)
 rm -rf $WORK_DIR
 WORK_SRC_DIR=$WORK_DIR/src && mkdir -p $WORK_SRC_DIR
 WORK_TGT_DIR=$WORK_DIR/tgt && mkdir -p $WORK_TGT_DIR
-MASTER_DIR=$1 && mkdir $MASTER_DIR
+MASTER_DIR=output/$1 && mkdir -p $MASTER_DIR
 
 #######################################
 # Move repo contents into a subdirectory of the same name
@@ -35,7 +35,6 @@ prepare_repo () {
   local new_repo=$WORK_TGT_DIR/$repo_name
   mkdir -p $new_repo
   mv $old_repo/.git/ $new_repo
-  mv $old_repo/.gitignore $new_repo
   mv $old_repo/ $new_repo/$repo_name
   pushd $new_repo
   git add $repo_name
@@ -48,21 +47,22 @@ pushd $MASTER_DIR
 git init
 touch README.md
 git add README.md
-git commit -am "Inital commit (monorepo)"
+git commit -am "Inital commit [MONOREAPER]"
 # create clean branch which will be used to stage new repos
 git branch clean
 
 for repo in "${@:2}"
 do
   git checkout clean
-  IFS="/" read owner repo_name <<<$repo
+  IFS="/" read owner repo_name repo_branch <<<$repo
+  remote_branch="${repo_branch:-master}"
   gh_url="git@github.com:${owner}/${repo_name}.git"
   git clone $gh_url $WORK_SRC_DIR/$repo_name
   prepare_repo $repo_name
   remote_name=remote_${repo_name}
   git remote add $remote_name $WORK_TGT_DIR/$repo_name
   git fetch --all
-  git branch $repo_name $remote_name/master
+  git branch $repo_name $remote_name/$remote_branch
   git checkout $repo_name
   git checkout master
   git merge $repo_name master --no-commit --no-ff
