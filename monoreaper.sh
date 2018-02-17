@@ -3,12 +3,12 @@
 # Merge multiple GitHub repos into a master-repo.
 #
 # chmod +x monoreaper.sh
-# Usage: bash monoreaper.sh monorepo owner0/repo0 owner1/repo1
+# Usage: bash monoreaper.sh owner0/repo0 owner1/repo1
 
 # check number of arguments at least 1
-if (( $# < 2 )); then
+if (( $# < 1 )); then
   printf "Error: At least one repo required.\n"
-  printf "Usage: bash monoreaper.sh monorepo owner0/repo0 owner1/repo1"
+  printf "Usage: bash monoreaper.sh owner0/repo0 owner1/repo1"
   printf "Exiting...\n"
   exit 1
 fi
@@ -17,7 +17,6 @@ WORK_DIR=$(mktemp -d)
 rm -rf $WORK_DIR
 WORK_SRC_DIR=$WORK_DIR/src && mkdir -p $WORK_SRC_DIR
 WORK_TGT_DIR=$WORK_DIR/tgt && mkdir -p $WORK_TGT_DIR
-MASTER_DIR=output/$1 && mkdir -p $MASTER_DIR
 
 #######################################
 # Move repo contents into a subdirectory of the same name
@@ -42,16 +41,22 @@ prepare_repo () {
   popd
 }
 
-# create root directory
-pushd $MASTER_DIR
-git init
-touch README.md
-git add README.md
-git commit -am "Inital commit [MONOREAPER]"
+# create monorepo directory if it doesn't already exist
+if [ -z "$MONOREPO_DIR" ]; then
+  MONOREPO_DIR=$PWD/monorepo/ && mkdir -p $MONOREPO_DIR
+  pushd $MONOREPO_DIR
+  git init
+  touch README.md
+  git add README.md
+  git commit -am "Inital commit [MONOREAPER]"
+  popd
+fi
+
+pushd $MONOREPO_DIR
 # create clean branch which will be used to stage new repos
 git branch clean
 
-for repo in "${@:2}"
+for repo in "${@:1}"
 do
   git checkout clean
   IFS="/" read owner repo_name repo_branch <<<$repo
