@@ -16,7 +16,7 @@ The above script will create a `monorepo` directory with a README.md file and su
 If you now want to add the monorepo to GitHub:
 
 ```bash
-cd output/monorepo/
+cd monorepo/
 git remote add origin git@github.com:user/monorepo
 git push -f origin master
 ```
