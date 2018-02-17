@@ -30,4 +30,4 @@ all you have to do is include a `MONOREPO_DIR` env variable:
 MONOREPO_DIR=path/to/my/monorepo bash monoreaper.sh user/repo0 user/repo1
 ```
 
-Note that the MONOREPO_DIR must have `master` as default branch.
+Note that the `MONOREPO_DIR` must have `master` as default branch.
