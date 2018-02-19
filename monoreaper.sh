@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Merge multiple GitHub repos into a master-repo.
+# Merge multiple GitHub repos into a monorepo.
 #
 # chmod +x monoreaper.sh
 # Usage: bash monoreaper.sh owner0/repo0 owner1/repo1
