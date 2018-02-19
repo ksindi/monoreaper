@@ -43,12 +43,15 @@ prepare_repo () {
 
 # create monorepo directory if it doesn't already exist
 if [ -z "$MONOREPO_DIR" ]; then
-  MONOREPO_DIR=$PWD/monorepo/ && mkdir -p $MONOREPO_DIR
+  MONOREPO_NAME="${MONOREPO_NAME:-monorepo}"
+  if [[ -d "$MONOREPO_NAME" ]]; then
+  	echo "Target repository directory $MONOREPO_NAME already exists." >&2
+  	return 1
+  fi
+
+  MONOREPO_DIR=$MONOREPO_NAME/ && mkdir -p $MONOREPO_DIR
   pushd $MONOREPO_DIR
   git init
-  touch README.md
-  git add README.md
-  git commit -am "Inital commit [MONOREAPER]"
   popd
 fi
 

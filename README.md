@@ -10,6 +10,7 @@ Features:
 ## Usage
 
 ```bash
+export MONOREPO_NAME=monorepo  # defaults to monorepo
 git clone git@github.com:ksindi/monoreaper.git && cd monoreaper/
 chmod +x monoreaper.sh
 bash monoreaper.sh user/repo0 user/repo1
@@ -48,4 +49,3 @@ Note that the `MONOREPO_DIR` must have `master` as default branch.
 - Lots of anecdotal evidence:
   - [Optimizing for iteration speed](https://erikbern.com/2017/07/06/optimizing-for-iteration-speed.html)
   - [Why Google Stores Billions of Lines of Code in a Single Repository](https://research.google.com/pubs/pub45424.html)
- 
