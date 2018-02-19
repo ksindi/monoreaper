@@ -1,6 +1,11 @@
 # MonoReaper
 
-Merge GitHub repositories into a monorepo directory while preserving commit history.
+Merge multiple GitHub repositories into a monorepo while preserving commit history. Each repo will live as a subdirectory.
+
+Features:
+  - Merge multiple repos while keeping full history and commit hashes
+  - Specify branches of each repo to merge
+  - Migrate repos into existing monorepo
 
 ## Usage
 
@@ -8,10 +13,10 @@ Merge GitHub repositories into a monorepo directory while preserving commit hist
 git clone git@github.com:ksindi/monoreaper.git && cd monoreaper/
 chmod +x monoreaper.sh
 bash monoreaper.sh user/repo0 user/repo1
-# you can specify branch via `user/repo0/some-branch`.
+# you can specify another default branch via `user/repo0/some-branch`.
 ```
 
-The above script will create a `monorepo` directory with a README.md file and subdirectores `repo0` and `repo1`.
+The above script will create a `monorepo` directory with a README.md file and subdirectores `repo0` and `repo1`. Note only the default branches of each repo will be included.
 
 If you now want to add the monorepo to GitHub:
 
