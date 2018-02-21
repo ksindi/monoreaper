@@ -3,9 +3,12 @@
 Merge multiple GitHub repositories into a monorepo while preserving commit history. Each repo will live as a subdirectory.
 
 Features:
-  - Merge multiple repos while keeping full history and commit hashes
-  - Specify branches of each repo to merge
-  - Migrate repos into existing monorepo
+  - Merge multiple repos while keeping full history and commit hashes.
+  - Specify branches of each repo to merge.
+  - Migrate repos into existing monorepo.
+
+Requirements:
+  - git version 2.9+.
 
 ## Usage
 

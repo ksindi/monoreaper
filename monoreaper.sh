@@ -73,7 +73,7 @@ do
   git branch $repo_name $remote_name/$remote_branch
   git checkout $repo_name
   git checkout master
-  git merge $repo_name master --no-commit --no-ff
+  git merge $repo_name master --no-commit --no-ff --allow-unrelated-histories
   git commit -am "Merge repo ${repo_name}"
   git remote remove $remote_name
 done
