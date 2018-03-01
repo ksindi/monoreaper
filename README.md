@@ -16,8 +16,8 @@ Requirements:
 export MONOREPO_NAME=monorepo  # defaults to monorepo
 git clone git@github.com:ksindi/monoreaper.git && cd monoreaper/
 chmod +x monoreaper.sh
-bash monoreaper.sh user/repo0 user/repo1
-# you can specify another default branch via `user/repo0/some-branch`.
+bash monoreaper.sh owner/repo0 owner/repo1
+# you can specify another default branch via `owner/repo0/some-branch`.
 ```
 
 The above script will create a `monorepo` directory with a README.md file and subdirectores `repo0` and `repo1`. Note only the default branches of each repo will be included.
@@ -26,7 +26,7 @@ If you now want to add the monorepo to GitHub:
 
 ```bash
 cd monorepo/
-git remote add origin git@github.com:user/monorepo
+git remote add origin git@github.com:owner/monorepo
 git push -f origin master
 ```
 
@@ -36,7 +36,7 @@ If you already have a monorepo and want to merge other repos into it,
 all you have to do is include a `MONOREPO_DIR` env variable:
 
 ```bash
-MONOREPO_DIR=path/to/my/monorepo bash monoreaper.sh user/repo0 user/repo1
+MONOREPO_DIR=path/to/my/monorepo bash monoreaper.sh owner/repo0 owner/repo1
 ```
 
 Note that the `MONOREPO_DIR` must have `master` as default branch.
