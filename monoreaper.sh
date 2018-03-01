@@ -37,7 +37,7 @@ prepare_repo () {
   mv $old_repo/ $new_repo/$repo_name
   pushd $new_repo
   git add $repo_name
-  git commit -am "Preparing ${repo_name} repository for merging."
+  git commit -am "Prepare ${repo_name} for merge"
   popd
 }
 
