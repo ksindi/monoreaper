@@ -1,6 +1,6 @@
 # MonoReaper
 
-Merge multiple GitHub repositories into a monorepo while preserving commit history. Each repo will live as a subdirectory.
+Merge multiple GitHub repositories into a monorepo while preserving commit history. Each repo will live as a subdirectory. **Currently only works in Linux**.
 
 Features:
   - Merge multiple repos while keeping full history and commit hashes.
