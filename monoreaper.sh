@@ -62,7 +62,7 @@ git branch clean
 for repo in "${@:1}"
 do
   git checkout clean
-  IFS="/" read owner repo_name repo_branch <<<$repo
+  IFS="/" read owner repo_name repo_branch <<<"$repo"
   remote_branch="${repo_branch:-master}"
   gh_url="git@github.com:${owner}/${repo_name}.git"
   git clone $gh_url $WORK_SRC_DIR/$repo_name
