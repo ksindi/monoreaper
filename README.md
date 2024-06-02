@@ -49,6 +49,3 @@ Note that the `MONOREPO_DIR` must have `master` as default branch.
 - Dependencies across services are easier to manage.
 - Searching code across multiple repos is a hassle.
 - Lots of great tools that take advantage of monorepos. See [awesome-monorepo](https://github.com/korfuri/awesome-monorepo).
-- Lots of anecdotal evidence:
-  - [Optimizing for iteration speed](https://erikbern.com/2017/07/06/optimizing-for-iteration-speed.html)
-  - [Why Google Stores Billions of Lines of Code in a Single Repository](https://research.google.com/pubs/pub45424.html)
